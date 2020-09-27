@@ -1,12 +1,11 @@
 const express=require("express");
 const bodyParser=require("body-parser");
-const app=express();
+const router=express.Router()
 const mongoose = require('mongoose');
 const multer=require('multer');
 const jimp=require('jimp');
 const { read } = require("jimp");
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static('public'))
 app.use(bodyParser.json());
 
 
@@ -24,7 +23,7 @@ const upload=multer({
 
 }).single('image');
 
-app.post('/multer',(req,res)=>{
+router.post('/multer',(req,res)=>{
     upload(req,res,function(err) {
         if(err) {
             console.log(err)
@@ -38,6 +37,6 @@ app.post('/multer',(req,res)=>{
 });
 module.exports=upload;
 
-app.listen(5454,function(){
-    console.log("server started");
-});
+// app.listen(5454,function(){
+//     console.log("server started");
+// });

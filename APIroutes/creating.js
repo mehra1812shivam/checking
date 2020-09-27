@@ -1,13 +1,12 @@
 const express=require("express");
 const bodyParser=require("body-parser");
-const app=express();
+const router=express.Router()
 const Certi=require('./info');
 const upload=require('./multer');
 const mongoose = require('mongoose');
 const multer=require('multer');
 const jimp=require('jimp');
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static('public'))
 app.use(bodyParser.json());
 
 mongoose.connect("mongodb://localhost:27017/certi", {useNewUrlParser: true,useUnifiedTopology:true},()=>{
@@ -20,7 +19,7 @@ mongoose.connect("mongodb://localhost:27017/certi", {useNewUrlParser: true,useUn
 //     // console.log(JSON.stringify(certis.fieldname,null));
 // });
 
-app.get("/creating/:postId", function(req, res){               //here postId is the name of parameter
+router.get("/creating/:postId", function(req, res){               //here postId is the name of parameter
     const requestedPostId = req.params.postId;
     var fname;
     var cx;
@@ -58,6 +57,8 @@ app.get("/creating/:postId", function(req, res){               //here postId is 
   });
 
   
-app.listen(2000,function(){
-    console.log("server started");
-});
+
+  
+// app.listen(2000,function(){
+//     console.log("server started");
+// });

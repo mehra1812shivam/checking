@@ -1,11 +1,10 @@
 const express=require("express");
 const bodyParser=require("body-parser");
-const app=express();
+const router=express.Router()
 const mongoose = require('mongoose');
 const multer=require('multer');
 const jimp=require('jimp');
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static('public'))
 app.use(bodyParser.json());
 
 mongoose.connect("mongodb://localhost:27017/certi", {useNewUrlParser: true,useUnifiedTopology:true},()=>{
@@ -50,7 +49,7 @@ var appFormSchema =mongoose.Schema({
 
 const Certi=mongoose.model("Certi",appFormSchema);
 
-app.post('/info',(req,res)=>{
+router.post('/info',(req,res)=>{
     var go={
         email:req.body.email,
         template_type:req.body.template_type,
@@ -73,8 +72,8 @@ app.post('/info',(req,res)=>{
 
 });
 
-app.listen(5000,function(){
-    console.log("server started");
-});
+// app.listen(5000,function(){
+//     console.log("server started");
+// });
 
 module.exports=Certi;
